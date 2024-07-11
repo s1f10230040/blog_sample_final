@@ -20,6 +20,8 @@ def index(request):
     else:
         articles = Article.objects.order_by('-posted_at')
 
+    print(articles.query)
+
     context = {
         "articles": articles
     }
@@ -58,6 +60,7 @@ def detail(request, article_id):
         'article': article,
         'comments': article.comments.order_by('-posted_at')
     }
+    print(context['comments'].query)
     return render(request, "blog/detail.html", context)
 
 def update(request, article_id):
